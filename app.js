@@ -7,7 +7,6 @@ const encoderPanel = document.getElementById('encoder-panel');
 const decoderPanel = document.getElementById('decoder-panel');
 
 // Encoder elements
-const fileInput = document.getElementById('fileInput');
 const fileDropArea = document.getElementById('file-drop-area');
 const fileBrowseButton = document.getElementById('file-browse-button');
 const fileSelectionInfo = document.getElementById('file-selection-info');
@@ -61,8 +60,12 @@ function handleFileSelect(file) {
     encodeStatus.innerHTML = `Ready to encode.`;
 }
 
-fileBrowseButton.addEventListener('click', () => fileInput.click());
-fileInput.addEventListener('change', (e) => handleFileSelect(e.target.files[0]));
+fileBrowseButton.addEventListener('click', () => {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.onchange = (e) => handleFileSelect(e.target.files[0]);
+    input.click();
+});
 
 // Allow clicking the drop area to open the file picker
 fileDropArea.addEventListener('click', (e) => {
