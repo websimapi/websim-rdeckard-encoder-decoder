@@ -65,7 +65,11 @@ fileBrowseButton.addEventListener('click', () => fileInput.click());
 fileInput.addEventListener('change', (e) => handleFileSelect(e.target.files[0]));
 
 // Allow clicking the drop area to open the file picker
-fileDropArea.addEventListener('click', () => fileInput.click());
+fileDropArea.addEventListener('click', (e) => {
+    // Don't trigger if the browse button was clicked (it has its own handler)
+    if (e.target === fileBrowseButton) return;
+    fileInput.click();
+});
 
 // Drag and drop for encoder
 fileDropArea.addEventListener('dragover', (e) => {
