@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>.rdeckard Encoder/Decoder</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="importmap">
         {
             "imports": {
@@ -11,43 +12,63 @@
         }
     </script>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>.rdeckard Encoder/Decoder (Rick = 0, Deckard = 1)</h1>
+    <header>
+        <h1>.rdeckard Encoder/Decoder</h1>
+        <p class="subtitle">Where every bit is a choice: Rick (0) or Deckard (1).</p>
+    </header>
 
-    <p class="warning">
-        Warning: This format inflates data by ~50-60x. Encoding/decoding large files will be slow and memory intensive. 
-        Always compress!
-    </p>
+    <main class="container">
+        <div class="mode-switcher">
+            <button id="switchToEncode" class="active">Encode</button>
+            <button id="switchToDecode">Decode</button>
+        </div>
 
-    <div class="container">
-        <section id="encoder">
-            <h2>Encode to .rdeckard</h2>
-            <input type="file" id="fileInput">
-            <label>
-                <input type="checkbox" id="compressToggle" checked> Compress (pako Deflate)
-            </label>
-            <button id="encodeButton" disabled>Encode File</button>
-            <p id="encodeStats"></p>
-            <textarea id="rdeckardOutput" rows="10" placeholder="Generated .rdeckard content"></textarea>
-            <a id="downloadRdeckard" style="display: none;"></a>
-        </section>
-
-        <section id="decoder">
-            <h2>Decode from .rdeckard</h2>
-            <p>Paste text or upload a .rdeckard file:</p>
-            <textarea id="rdeckardInput" rows="10" placeholder="Paste .rdeckard content here"></textarea>
-            <input type="file" id="rdeckardFileInput" accept=".rdeckard,text/plain">
-            <button id="decodeButton" disabled>Decode Content</button>
-            <p id="decodeStats"></p>
-            <div id="decodedOutput">
-                <p>Decoded content will appear here (images, video, download link).</p>
+        <div id="encoder-panel" class="panel active">
+            <h2>Encode File to .rdeckard</h2>
+            <div id="file-drop-area" class="drop-area">
+                <p>Drag & Drop a file here</p>
+                <p>or</p>
+                <button id="file-browse-button" type="button">Browse Files</button>
+                <input type="file" id="fileInput" hidden>
             </div>
-        </section>
-    </div>
+            <div id="file-selection-info" class="file-info" style="display: none;"></div>
+            
+            <div class="options">
+                <label>
+                    <input type="checkbox" id="compressToggle" checked> Compress (pako Deflate)
+                </label>
+            </div>
+            <button id="encodeButton" class="cta-button" disabled>Encode File</button>
+            <div id="encode-status" class="status-box"></div>
+        </div>
+
+        <div id="decoder-panel" class="panel">
+            <h2>Decode .rdeckard File</h2>
+            <textarea id="rdeckardInput" rows="8" placeholder="Paste .rdeckard content here, or drop a .rdeckard file onto this area."></textarea>
+             <input type="file" id="rdeckardFileInput" accept=".rdeckard,text/plain" hidden>
+            <button id="decodeButton" class="cta-button" disabled>Decode Content</button>
+            <div id="decode-status" class="status-box"></div>
+            <div id="decoded-output-container">
+                <h3>Decoded Output:</h3>
+                <div id="decodedOutput">
+                    <p>Decoded content will appear here.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p class="warning">
+            <strong>Warning:</strong> This format significantly inflates data size (~50-60x). Encoding/decoding large files will be slow and memory intensive. Always compress!
+        </p>
+    </footer>
 
     <script type="module" src="app.js"></script>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"4c6229722a6346bc8eb5cb0e5eae5d41","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 </body>
 </html>
-
