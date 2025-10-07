@@ -64,6 +64,9 @@ function handleFileSelect(file) {
 fileBrowseButton.addEventListener('click', () => fileInput.click());
 fileInput.addEventListener('change', (e) => handleFileSelect(e.target.files[0]));
 
+// Allow clicking the drop area to open the file picker
+fileDropArea.addEventListener('click', () => fileInput.click());
+
 // Drag and drop for encoder
 fileDropArea.addEventListener('dragover', (e) => {
     e.preventDefault();
@@ -81,7 +84,6 @@ fileDropArea.addEventListener('drop', (e) => {
     fileDropArea.classList.remove('drag-over');
     const files = e.dataTransfer.files;
     if (files.length > 0) {
-        fileInput.files = files; // Important for reusing logic
         handleFileSelect(files[0]);
     }
 });
