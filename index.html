@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>.rdeckard Encoder/Decoder</title>
+    <script type="importmap">
+        {
+            "imports": {
+                "pako": "https://cdn.jsdelivr.net/npm/pako@2.1.0/dist/pako.mjs",
+                "rdeckard": "./rdeckard.js"
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>.rdeckard Encoder/Decoder (Rick = 0, Deckard = 1)</h1>
+
+    <p class="warning">
+        Warning: This format inflates data by ~50-60x. Encoding/decoding large files will be slow and memory intensive. 
+        Always compress!
+    </p>
+
+    <div class="container">
+        <section id="encoder">
+            <h2>Encode to .rdeckard</h2>
+            <input type="file" id="fileInput">
+            <label>
+                <input type="checkbox" id="compressToggle" checked> Compress (pako Deflate)
+            </label>
+            <button id="encodeButton" disabled>Encode File</button>
+            <p id="encodeStats"></p>
+            <textarea id="rdeckardOutput" rows="10" placeholder="Generated .rdeckard content"></textarea>
+            <a id="downloadRdeckard" style="display: none;"></a>
+        </section>
+
+        <section id="decoder">
+            <h2>Decode from .rdeckard</h2>
+            <p>Paste text or upload a .rdeckard file:</p>
+            <textarea id="rdeckardInput" rows="10" placeholder="Paste .rdeckard content here"></textarea>
+            <input type="file" id="rdeckardFileInput" accept=".rdeckard,text/plain">
+            <button id="decodeButton" disabled>Decode Content</button>
+            <p id="decodeStats"></p>
+            <div id="decodedOutput">
+                <p>Decoded content will appear here (images, video, download link).</p>
+            </div>
+        </section>
+    </div>
+
+    <script type="module" src="app.js"></script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"4c6229722a6346bc8eb5cb0e5eae5d41","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>
+
