@@ -191,4 +191,3 @@ function displayDecodedContent(data, metadata) {
 
 // Initial state check
 checkDecodeReady();
-
